@@ -1,5 +1,13 @@
-import React from "react";
+import BoardNav from "components/mocular/boardCategory/BoardNav";
+import LocalCategory from "components/mocular/boardCategory/LocalCategory";
 
-export default function LocalBoard() {
-  return <div>LocalBoard</div>;
+export default function LocalBoardList() {
+  return (
+    <div>
+      <div>
+        <LocalCategory />
+        <BoardNav />
+      </div>
+    </div>
+  );
 }

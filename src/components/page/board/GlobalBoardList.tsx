@@ -1,5 +1,11 @@
-import React from "react";
+import BoardNav from "components/mocular/boardCategory/BoardNav";
+import GlobalCategory from "components/mocular/boardCategory/GlobalCategory";
 
-export default function Board() {
-  return <div>Board</div>;
+export default function GlobalBoardList() {
+  return (
+    <div>
+      <GlobalCategory />
+      <BoardNav />
+    </div>
+  );
 }
