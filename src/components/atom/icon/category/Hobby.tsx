@@ -1,4 +1,4 @@
-export default function Habby({ colored = false }: { colored?: boolean }) {
+export default function Hobby({ colored = false }: { colored?: boolean }) {
   return (
     <svg width="62" height="67" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#a)" stroke={colored ? "#44AC8D" : "#787878"}>

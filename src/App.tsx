@@ -1,16 +1,28 @@
+import BottomNav from "components/mocular/common/BottomNav";
 import Header from "components/mocular/common/Header";
 import Login from "components/page/auth/Login";
 import Register from "components/page/auth/Register";
+import BoardCreate from "components/page/board/BoardCreate";
 import GlobalBoardList from "components/page/board/GlobalBoardList";
 import LocalBoardList from "components/page/board/LocalBoardList";
+import MatchList from "components/page/matching/MatchList";
+import MyPage from "components/page/mypage/MyPage";
 import { Route, Routes } from "react-router-dom";
 
 function headerWrapping(children: JSX.Element | string, subtitle?: string) {
   return (
-    <div>
+    <div className="w-full">
       <Header subtitle={subtitle} />
       <div className="pt-11">{children}</div>
     </div>
+  );
+}
+
+function bottomNavWrapping(children: JSX.Element) {
+  return (
+    <>
+      {children} <BottomNav />
+    </>
   );
 }
 
@@ -22,11 +34,33 @@ function App() {
         <Route path="/regist" element={<Register />}></Route>
         <Route
           path="/globalBoard"
-          element={headerWrapping(<GlobalBoardList />, "(All)")}
+          element={headerWrapping(
+            bottomNavWrapping(<GlobalBoardList />),
+            "(All)"
+          )}
         ></Route>
         <Route
           path="/localBoard"
-          element={headerWrapping(<LocalBoardList />, "(Local)")}
+          element={headerWrapping(
+            bottomNavWrapping(<LocalBoardList />),
+            "(Local)"
+          )}
+        ></Route>
+        <Route
+          path="/globalBoard/create"
+          element={headerWrapping(<BoardCreate />, "(write)")}
+        ></Route>
+        <Route
+          path="/localBoard/create"
+          element={headerWrapping(<BoardCreate />, "(write)")}
+        ></Route>
+        <Route
+          path="/matching"
+          element={headerWrapping(bottomNavWrapping(<MatchList />), "(Match)")}
+        ></Route>
+        <Route
+          path="/mypage"
+          element={headerWrapping(bottomNavWrapping(<MyPage />), "(MyPage)")}
         ></Route>
       </Routes>
     </div>

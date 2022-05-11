@@ -10,7 +10,7 @@ Header.defaultProps = {
 
 export default function Header({ subtitle }: HeaderProps) {
   return (
-    <header className="fixed pl-5 py-2 bg-lightGray z-40 w-full">
+    <header className="fixed pl-5 py-2 bg-lightGray z-40 max-w-[30rem] w-full">
       <h1 className="text-xl text-deepBlack font-Jua">
         SingleTalk&nbsp;{subtitle}
       </h1>

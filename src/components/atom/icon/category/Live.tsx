@@ -9,8 +9,8 @@ export default function Live({ colored = false }: { colored?: boolean }) {
           stroke={colored ? "#44AC8D" : "#787878"}
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="m31.577 8.402-.699-.699-.707.692L15.35 22.888l1.398 1.43 1.017-.994v11.337h9.18v-8.176h7.65v8.176h8.733v-11.68l1.329 1.33 1.414-1.415L31.577 8.402Zm9.75 12.58L30.863 10.515 19.765 21.368v11.293h5.18v-8.176h11.65v8.176h4.733v-11.68Z"
           fill={colored ? "#44AC8D" : "#787878"}
         />

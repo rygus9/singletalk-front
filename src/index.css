@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
