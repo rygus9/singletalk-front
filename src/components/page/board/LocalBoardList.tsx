@@ -10,9 +10,10 @@ export default function LocalBoardList() {
   for (let _ of [1, 2, 3, 4, 5]) {
     mockData.push({
       title: "라면 정말 맛있게 먹기",
-      memberId: "유저1",
-      memberNickname: "Cuzz",
-      memberImgSrc: null,
+      userId: "유저1",
+      postId: "포스트1",
+      userNickname: "Cuzz",
+      userImgSrc: null,
       content: "여기에는 내용이 들어갑니다.",
       modifiedDate: "2022.03.13",
       usefulCnt: 10,

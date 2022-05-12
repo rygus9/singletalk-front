@@ -1,3 +1,8 @@
+import NormalButton from "components/atom/button/NormalButton";
+import LabelInput from "components/atom/input/LabelInput";
+import LabelCheckBox from "components/atom/selectBox/LabelCheckBox";
+import TextArea from "components/atom/textArea";
+import CategorySelector from "components/mocular/boardCategory/CategorySelector";
 import { GlobalCategoryKind } from "components/mocular/boardCategory/GlobalCategory";
 import { LocalCategoryKind } from "components/mocular/boardCategory/LocalCategory";
 import { useEffect, useState } from "react";
@@ -25,6 +30,7 @@ export default function BoardCreate() {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm<BoardForm>();
 
   const onSubmit = (data: BoardForm) => {
@@ -33,6 +39,10 @@ export default function BoardCreate() {
   const onError = (err: any) => {
     console.log(err);
   };
+
+  useEffect(() => {
+    setValue("category", "all");
+  }, [setValue]);
 
   return (
     <section className="w-full px-4">
@@ -52,7 +62,40 @@ export default function BoardCreate() {
           &nbsp; &gt;
         </Link>
       </header>
-      <form onSubmit={handleSubmit(onSubmit, onError)}></form>
+      <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-2">
+        <LabelInput
+          label="제목"
+          labelSize="lg"
+          placeholder="제목을 입력하세요"
+          register={register("title", {
+            required: "제목은 필수로 입력해야 합니다.",
+          })}
+          error={errors.title}
+        ></LabelInput>
+        <TextArea
+          label="내용"
+          register={register("content", {
+            required: "내용은 필수로 입력해야 합니다.",
+          })}
+          error={errors.content}
+        ></TextArea>
+        <div className="text-xl">카테고리</div>
+        <CategorySelector
+          type="global"
+          now={watch().category}
+          setValue={setValue}
+        />
+        <LabelCheckBox
+          label={"익명 여부"}
+          register={register("isAnonymous")}
+        ></LabelCheckBox>
+
+        <div className="w-full flex justify-center items-center pt-6">
+          <NormalButton type="submit" size="lg" color="normalColor">
+            제출하기
+          </NormalButton>
+        </div>
+      </form>
     </section>
   );
 }

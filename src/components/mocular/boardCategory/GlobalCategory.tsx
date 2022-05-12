@@ -8,7 +8,7 @@ import useCategory from "./hook/useCategory";
 
 export type GlobalCategoryKind = "all" | "food" | "live" | "money" | "hobby";
 
-const globalElement: {
+export const globalElement: {
   element: JSX.Element;
   coloredElement: JSX.Element;
   category: GlobalCategoryKind;

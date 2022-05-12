@@ -2,6 +2,7 @@ import BottomNav from "components/mocular/common/BottomNav";
 import Header from "components/mocular/common/Header";
 import Login from "components/page/auth/Login";
 import Register from "components/page/auth/Register";
+import Board from "components/page/board/Board";
 import BoardCreate from "components/page/board/BoardCreate";
 import GlobalBoardList from "components/page/board/GlobalBoardList";
 import LocalBoardList from "components/page/board/LocalBoardList";
@@ -53,6 +54,14 @@ function App() {
         <Route
           path="/localBoard/create"
           element={headerWrapping(<BoardCreate />, "(write)")}
+        ></Route>
+        <Route
+          path="/globalBoard/:postId"
+          element={headerWrapping(<Board />, "")}
+        ></Route>
+        <Route
+          path="/localBoard/:postId"
+          element={headerWrapping(<Board />, "")}
         ></Route>
         <Route
           path="/matching"

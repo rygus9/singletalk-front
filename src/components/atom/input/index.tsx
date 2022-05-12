@@ -8,8 +8,8 @@ const inputSizeValue = {
 };
 
 const colorValue = {
-  normal: "border-gray focus:ring-lightPurple focus:border-lightPurple",
-  main: "border-deepPurple focus:ring-deepPurple focus:border-deepPurple",
+  normal: "border-gray focus:ring-lightGreen focus:border-lightGreen",
+  main: "border-deepGreen focus:ring-deepGreen focus:border-deepGreen",
   black: "border-deepGray focus:ring-lightBlack focus:border-lightBlack",
 };
 

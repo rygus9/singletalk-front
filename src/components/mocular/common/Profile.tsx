@@ -2,7 +2,7 @@ export default function Profile({
   imageSrc,
   nickname,
 }: {
-  imageSrc?: string;
+  imageSrc?: string | null;
   nickname: string;
 }) {
   return (

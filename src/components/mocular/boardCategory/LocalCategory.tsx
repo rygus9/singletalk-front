@@ -7,7 +7,7 @@ import { cls } from "util/utils";
 
 export type LocalCategoryKind = "all" | "cafe" | "buy" | "travel";
 
-const localElement: {
+export const localElement: {
   element: JSX.Element;
   coloredElement: JSX.Element;
   category: LocalCategoryKind;
