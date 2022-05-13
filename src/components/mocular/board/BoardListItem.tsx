@@ -5,8 +5,8 @@ import BoardListInfo from "./BoardListInfo";
 
 export default function BoardListItem({ ...elem }: BoardListType) {
   return (
-    <Link to={`./${elem.postId}`}>
-      <section className="pt-3 pb-1">
+    <section className="pt-3 pb-1 px-3">
+      <Link to={`./${elem.postId}`}>
         <h2 className="text-deepBlack text-xl pb-2">{elem.title}</h2>
         <Profile nickname={elem.userNickname}></Profile>
         <p className="py-2 min-h-[4rem] text-black">{elem.content}</p>
@@ -18,7 +18,7 @@ export default function BoardListItem({ ...elem }: BoardListType) {
             commentCnt={elem.commentCnt}
           />
         </div>
-      </section>
-    </Link>
+      </Link>
+    </section>
   );
 }

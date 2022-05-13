@@ -53,7 +53,7 @@ export default function ChatList() {
         <div key={`${index} mainChat`}>
           <MainChatElem {...elem} />
           {elem.answers && (
-            <div className="pl-5 divide-y divide-deepGray">
+            <div className="pl-5 divide-y divide-deepGray border-t border-deepGray">
               {elem.answers.map((subElem, subIndex) => (
                 <div key={`${subIndex} subChat`}>
                   <SubChatElem {...subElem} />
