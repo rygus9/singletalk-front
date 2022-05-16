@@ -5,6 +5,7 @@ import TextArea from "components/atom/textArea";
 import CategorySelector from "components/mocular/boardCategory/CategorySelector";
 import { GlobalCategoryKind } from "components/mocular/boardCategory/GlobalCategory";
 import { LocalCategoryKind } from "components/mocular/boardCategory/LocalCategory";
+import LocationUI from "components/mocular/boardCategory/LocationUI";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation } from "react-router-dom";
@@ -31,7 +32,7 @@ export default function BoardCreate() {
     formState: { errors },
     setValue,
     watch,
-  } = useForm<BoardForm>();
+  } = useForm<BoardForm>({ mode: "onSubmit" });
 
   const onSubmit = (data: BoardForm) => {
     console.log(data);
@@ -62,7 +63,11 @@ export default function BoardCreate() {
           &nbsp; &gt;
         </Link>
       </header>
-      <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-2">
+      {nowBoard === "globalBoard" ? <></> : <LocationUI />}
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        className="space-y-2 mt-2"
+      >
         <LabelInput
           label="제목"
           labelSize="lg"

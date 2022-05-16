@@ -20,7 +20,7 @@ export default function LabelCheckBox({
     <label className={cls("flex items-center")}>
       <span
         className={cls(
-          "text-black pr-2 text-xl w-12",
+          "text-lightBlack pr-2 text-xl",
           labelSize === "md" ? "text-xl" : "text-md"
         )}
       >

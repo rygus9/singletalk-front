@@ -17,6 +17,7 @@ interface PostType {
   joyfulCnt: number;
   usefulCnt: number;
   commentCnt: number;
+  isOwner: boolean;
 }
 
 const data: PostType = {
@@ -35,6 +36,7 @@ const data: PostType = {
   joyfulCnt: 10,
   usefulCnt: 7,
   commentCnt: 5,
+  isOwner: false,
 };
 
 export default function Board() {
