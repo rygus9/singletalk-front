@@ -37,7 +37,7 @@ export default function BottomNav() {
   const nowNav = location.pathname;
 
   return (
-    <nav className="fixed bottom-0 w-screen max-w-[30rem] m-auto z-40">
+    <nav className="fixed bottom-0 w-screen max-w-[30rem] m-auto z-40 bg-white">
       <ul className="flex">
         {bottomNavElem.map((elem, index) => (
           <li

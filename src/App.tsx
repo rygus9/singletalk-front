@@ -6,6 +6,7 @@ import Board from "components/page/board/Board";
 import BoardCreate from "components/page/board/BoardCreate";
 import GlobalBoardList from "components/page/board/GlobalBoardList";
 import LocalBoardList from "components/page/board/LocalBoardList";
+import MatchCreate from "components/page/matching/MatchCreate";
 import MatchList from "components/page/matching/MatchList";
 import MyPage from "components/page/mypage/MyPage";
 import { Route, Routes } from "react-router-dom";
@@ -66,6 +67,10 @@ function App() {
         <Route
           path="/matching"
           element={headerWrapping(bottomNavWrapping(<MatchList />), "(Match)")}
+        ></Route>
+        <Route
+          path="/matching/create"
+          element={headerWrapping(<MatchCreate />, "(write)")}
         ></Route>
         <Route
           path="/mypage"
