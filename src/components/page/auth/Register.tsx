@@ -8,6 +8,8 @@ interface RegisterForm {
   nickname: string;
   password: string;
   passwordValid: string;
+  bigLocation: string;
+  subLocation: string;
 }
 
 export default function Register() {

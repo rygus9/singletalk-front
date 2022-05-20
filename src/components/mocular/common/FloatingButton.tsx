@@ -1,5 +1,5 @@
 import RoundedButton from "components/atom/button/RoundedButton";
-import Plus from "components/atom/icon/Plus";
+import Plus from "components/atom/icon/common/Plus";
 import { Link } from "react-router-dom";
 import { cls } from "util/utils";
 

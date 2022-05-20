@@ -1,6 +1,6 @@
 import Chat from "components/atom/icon/bottom/Chat";
 import Home from "components/atom/icon/bottom/Home";
-import Match from "components/atom/icon/bottom/Match";
+import Match from "components/atom/icon/bottom/MatchIcon";
 import MyPage from "components/atom/icon/bottom/MyPage";
 import { Link, useLocation } from "react-router-dom";
 import { cls } from "util/utils";

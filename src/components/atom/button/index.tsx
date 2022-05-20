@@ -10,9 +10,11 @@ const sizeValue = {
 };
 
 const colorValue = {
-  main: "bg-deepGreen text-white",
-  normal: "border border-deepGray text-lightBlack bg-white",
-  normalColor: "border-2 border-deepGreen text-deepGreen bg-white",
+  main: "bg-deepGreen text-white hover:font-bold",
+  normal:
+    "border border-deepGray text-lightBlack bg-white hover:ring-1 hover:ring-deepGray hover:font-bold",
+  normalColor:
+    "border border-deepGreen text-deepGreen bg-white hover:ring-1 hover:ring-deepGreen hover:font-bold",
 };
 
 export interface ButtonProps {

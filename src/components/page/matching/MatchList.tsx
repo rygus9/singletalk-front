@@ -1,26 +1,38 @@
 import NormalButton from "components/atom/button/NormalButton";
 import Input from "components/atom/input";
 import LabelCheckBox from "components/atom/selectBox/LabelCheckBox";
-import MatchingBoardListItem from "components/mocular/board/MatchingBoardListItem";
+import MatchingBoardListItem from "components/mocular/matching/MatchingBoardListItem";
 import LocationUI from "components/mocular/boardCategory/LocationUI";
 import FloatingButton from "components/mocular/common/FloatingButton";
-import { BoardListType } from "../board/GlobalBoardList";
+
+export interface MatchingBoardListType {
+  title: string;
+  userId: string;
+  postId: string;
+  userNickname: string;
+  userImgSrc?: string | null;
+  content: string;
+  modifiedDate: string;
+  commentCnt: number;
+  totalPeople: number;
+  nowPeople: number;
+}
 
 export default function LocalBoardList() {
-  let mockData: BoardListType[] = [];
+  let mockData: MatchingBoardListType[] = [];
 
   for (let _ of [1, 2, 3, 4, 5]) {
     mockData.push({
       title: "라면 정말 맛있게 먹기",
       userId: "유저1",
-      postId: "포스트1",
+      postId: "매칭1",
       userNickname: "Cuzz",
       userImgSrc: null,
       content: "여기에는 내용이 들어갑니다.",
       modifiedDate: "2022.03.13",
-      usefulCnt: 10,
-      joyfulCnt: 5,
       commentCnt: 3,
+      totalPeople: 4,
+      nowPeople: 3,
     });
   }
 

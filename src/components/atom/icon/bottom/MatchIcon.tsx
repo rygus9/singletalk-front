@@ -1,4 +1,4 @@
-export default function Match({ colored = false }: { colored?: boolean }) {
+export default function MatchIcon({ colored = false }: { colored?: boolean }) {
   return (
     <svg
       width="32"

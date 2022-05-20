@@ -1,4 +1,4 @@
-import Plus from "components/atom/icon/Plus";
+import Plus from "components/atom/icon/common/Plus";
 import Input from "components/atom/input";
 import LabelCheckBox from "components/atom/selectBox/LabelCheckBox";
 import { useForm } from "react-hook-form";

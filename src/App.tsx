@@ -2,7 +2,7 @@ import BottomNav from "components/mocular/common/BottomNav";
 import Header from "components/mocular/common/Header";
 import Login from "components/page/auth/Login";
 import Register from "components/page/auth/Register";
-import Board from "components/page/board/Board";
+import Board from "components/page/board/BoardPage";
 import BoardCreate from "components/page/board/BoardCreate";
 import GlobalBoardList from "components/page/board/GlobalBoardList";
 import LocalBoardList from "components/page/board/LocalBoardList";
@@ -10,6 +10,10 @@ import MatchCreate from "components/page/matching/MatchCreate";
 import MatchList from "components/page/matching/MatchList";
 import MyPage from "components/page/mypage/MyPage";
 import { Route, Routes } from "react-router-dom";
+import MatchPage from "components/page/matching/MatchPage";
+import { cls } from "util/utils";
+import { useRecoilValue } from "recoil";
+import { openState } from "recoil/openState";
 
 function headerWrapping(children: JSX.Element | string, subtitle?: string) {
   return (
@@ -29,8 +33,17 @@ function bottomNavWrapping(children: JSX.Element) {
 }
 
 function App() {
+  const open = useRecoilValue(openState);
+
   return (
-    <div className="max-w-[30rem] m-auto">
+    <div
+      className={cls(
+        "max-w-[30rem] m-auto",
+        open.logoutOpen || open.matchingOpen || open.postDeleteOpen
+          ? "h-screen overflow-hidden"
+          : ""
+      )}
+    >
       <Routes>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/regist" element={<Register />}></Route>
@@ -57,11 +70,7 @@ function App() {
           element={headerWrapping(<BoardCreate />, "(write)")}
         ></Route>
         <Route
-          path="/globalBoard/:postId"
-          element={headerWrapping(<Board />, "")}
-        ></Route>
-        <Route
-          path="/localBoard/:postId"
+          path="/board/:postId"
           element={headerWrapping(<Board />, "")}
         ></Route>
         <Route
@@ -71,6 +80,10 @@ function App() {
         <Route
           path="/matching/create"
           element={headerWrapping(<MatchCreate />, "(write)")}
+        ></Route>
+        <Route
+          path="/matching/:matchId"
+          element={headerWrapping(<MatchPage />)}
         ></Route>
         <Route
           path="/mypage"

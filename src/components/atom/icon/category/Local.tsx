@@ -7,7 +7,7 @@ export default function Local({ colored = false }: { colored?: boolean }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_79_941)">
+      <g clipPath="url(#clip0_79_941)">
         <circle
           cx="31"
           cy="23"

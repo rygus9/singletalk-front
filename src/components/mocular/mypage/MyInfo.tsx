@@ -1,4 +1,8 @@
 import NormalButton from "components/atom/button/NormalButton";
+import { useCallback } from "react";
+import { useRecoilState } from "recoil";
+import { openState } from "recoil/openState";
+import LogoutModal from "./LogoutModal";
 
 export interface MyPageInfo {
   nickname: string;
@@ -8,6 +12,12 @@ export interface MyPageInfo {
 }
 
 export default function MyInfo() {
+  const [open, setOpen] = useRecoilState(openState);
+
+  const onLogoutClick = useCallback(() => {
+    setOpen({ ...open, logoutOpen: !open.logoutOpen });
+  }, [setOpen, open]);
+
   const myInfo: MyPageInfo = {
     nickname: "Cuzz",
     introduce: "안녕하세요.",
@@ -33,7 +43,7 @@ export default function MyInfo() {
         <div className="flex items-center">
           <h3 className="text-2xl mr-3 text-deepBlack">{myInfo.nickname}</h3>
           <span className="underline mr-10 text-deepBlack">수정하기</span>
-          <NormalButton type="button" size="sm">
+          <NormalButton type="button" size="sm" onClick={onLogoutClick}>
             로그아웃
           </NormalButton>
         </div>
@@ -45,6 +55,7 @@ export default function MyInfo() {
           </NormalButton>
         </div>
       </div>
+      {open.logoutOpen && <LogoutModal />}
     </header>
   );
 }
