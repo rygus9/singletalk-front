@@ -7,14 +7,13 @@ import Profile from "../common/Profile";
 
 export interface MatchPersonType {
   userId: string;
-  userImgSrc?: any | null;
   userNickName: string;
 }
 
 const data: MatchPersonType[] = [
-  { userId: "멤버1", userNickName: "Cuzz", userImgSrc: null },
-  { userId: "멤버1", userNickName: "Cuzz", userImgSrc: null },
-  { userId: "멤버1", userNickName: "Cuzz", userImgSrc: null },
+  { userId: "멤버1", userNickName: "Cuzz" },
+  { userId: "멤버1", userNickName: "Cuzz" },
+  { userId: "멤버1", userNickName: "Cuzz" },
 ];
 
 export default function MatchingModal() {
@@ -34,10 +33,7 @@ export default function MatchingModal() {
           {data.map((elem) => (
             <div className="flex items-center justify-between px-4">
               <div>
-                <Profile
-                  nickname={elem.userNickName}
-                  imageSrc={elem.userImgSrc}
-                />
+                <Profile nickname={elem.userNickName} />
               </div>
               <NormalButton type="button" size="sm">
                 삭제하기

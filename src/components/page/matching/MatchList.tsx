@@ -16,6 +16,7 @@ export interface MatchingBoardListType {
   commentCnt: number;
   totalPeople: number;
   nowPeople: number;
+  isDone: boolean;
 }
 
 export default function LocalBoardList() {
@@ -33,6 +34,7 @@ export default function LocalBoardList() {
       commentCnt: 3,
       totalPeople: 4,
       nowPeople: 3,
+      isDone: false,
     });
   }
 
@@ -41,7 +43,7 @@ export default function LocalBoardList() {
       <aside className="fixed z-40 max-w-[30rem] w-full bg-white shadow-sm">
         <div className="pl-3 pt-2">
           <LocationUI />
-          <form action="" className="mt-3 space-y-2 py-2">
+          <form action="" className="mt-3 space-y-2 py-2 pr-2">
             <Input placeholder="제목을 입력하세요."></Input>
             <div className="flex items-center justify-between">
               <LabelCheckBox

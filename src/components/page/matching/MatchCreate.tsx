@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 export interface MatchForm {
   title: string;
-  content: string;
+  contents: string;
   link: string;
   people: number;
 }
@@ -42,10 +42,10 @@ export default function MatchCreate() {
         ></LabelInput>
         <TextArea
           label="내용"
-          register={register("content", {
+          register={register("contents", {
             required: "내용은 필수로 입력해야 합니다.",
           })}
-          error={errors.content}
+          error={errors.contents}
         ></TextArea>
         <LabelInput
           label="오픈채팅링크"

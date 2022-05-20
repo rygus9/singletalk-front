@@ -10,7 +10,6 @@ export interface MatchType {
   title: string;
   content: string;
   userId: string;
-  userImgSrc?: any | null;
   userNickName: string;
   isOwner: boolean;
   isJoin: boolean;
@@ -25,7 +24,6 @@ const data: MatchType = {
     라면을 다 부셔서 넣는다.
     그럼 숟가락으로 퍼먹으면 되는데 나름 색다름.`,
   userId: "유저1",
-  userImgSrc: null,
   userNickName: "Cuzz",
   isOwner: true,
   isJoin: false,
@@ -53,10 +51,7 @@ export default function MatchPage() {
             <></>
           )}
         </header>
-        <Profile
-          nickname={data.userNickName}
-          imageSrc={data.userImgSrc}
-        ></Profile>
+        <Profile nickname={data.userNickName}></Profile>
         <p className="text-black text-lg mt-5 mb-3 px-1 min-h-[12rem]">
           {data.content.split("\n").map((elem, index) => (
             <span key={index}>

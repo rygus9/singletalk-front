@@ -1,6 +1,7 @@
 import NormalButton from "components/atom/button/NormalButton";
 import LabelInput from "components/atom/input/LabelInput";
 import AuthHeader from "components/mocular/auth/AuthHeader";
+import LocationInput from "components/mocular/location/LocationInput";
 import { useForm } from "react-hook-form";
 
 interface RegisterForm {
@@ -17,6 +18,7 @@ export default function Register() {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = useForm<RegisterForm>({ mode: "onChange" });
 
   const onValid = (data: RegisterForm) => {};
@@ -68,6 +70,11 @@ export default function Register() {
             required: "비밀번호 검증은 필수로 입력해야 합니다.",
           })}
           error={errors.passwordValid}
+        />
+        <LocationInput
+          nowLoc={watch().bigLocation}
+          bigLocRegister={register("bigLocation")}
+          subLocRegister={register("subLocation")}
         />
         <div className="py-3 flex flex-col items-center">
           <NormalButton type="submit" color="normalColor" size="lg">

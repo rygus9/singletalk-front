@@ -8,7 +8,6 @@ export interface MyPageInfo {
   nickname: string;
   introduce: string;
   location: string;
-  imageSrc: string | null;
 }
 
 export default function MyInfo() {
@@ -22,22 +21,13 @@ export default function MyInfo() {
     nickname: "Cuzz",
     introduce: "안녕하세요.",
     location: "수원시",
-    imageSrc: null,
   };
   return (
     <header className="flex items-center">
       <div className="px-6">
-        {myInfo.imageSrc ? (
-          <img
-            src={myInfo.imageSrc}
-            alt="Profile"
-            className="w-16 h-16 rounded-full object-cover"
-          ></img>
-        ) : (
-          <div className="w-16 h-16 rounded-full border border-black flex justify-center items-center text-black">
-            익
-          </div>
-        )}
+        <div className="w-16 h-16 rounded-full border border-black flex justify-center items-center text-black">
+          익
+        </div>
       </div>
       <div className="py-4">
         <div className="flex items-center">

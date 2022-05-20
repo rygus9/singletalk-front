@@ -9,7 +9,6 @@ interface PostType {
   title: string;
   content: string;
   userId: string;
-  userImgSrc?: any | null;
   userNickName: string;
   isScrap: boolean;
   isJoy: boolean;
@@ -28,7 +27,6 @@ const data: PostType = {
     라면을 다 부셔서 넣는다.
     그럼 숟가락으로 퍼먹으면 되는데 나름 색다름.`,
   userId: "유저1",
-  userImgSrc: null,
   userNickName: "Cuzz",
   isScrap: false,
   isJoy: true,
@@ -46,10 +44,7 @@ export default function Board() {
         <header className="pt-10 pb-3">
           <h2 className="text-2xl">{data.title}</h2>
         </header>
-        <Profile
-          nickname={data.userNickName}
-          imageSrc={data.userImgSrc}
-        ></Profile>
+        <Profile nickname={data.userNickName}></Profile>
         <p className="text-black text-lg mt-5 mb-3 px-1">
           {data.content.split("\n").map((elem, index) => (
             <span key={index}>
