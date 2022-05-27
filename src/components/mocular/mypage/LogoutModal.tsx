@@ -1,22 +1,23 @@
 import NormalButton from "components/atom/button/NormalButton";
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { openState } from "recoil/openState";
 import ModalFrame from "../common/ModalFram";
+import useLogout from "./hook/useLogout";
 
 export default function LogoutModal() {
   const [open, setOpen] = useRecoilState(openState);
-  const navigate = useNavigate();
+
+  const { mutate: logoutMutate } = useLogout();
 
   const onModalClose = useCallback(() => {
     setOpen({ ...open, logoutOpen: !open.logoutOpen });
   }, [open, setOpen]);
 
   const onLogoutClick = useCallback(() => {
-    navigate("/login");
+    logoutMutate();
     onModalClose();
-  }, [navigate, onModalClose]);
+  }, [logoutMutate, onModalClose]);
 
   return (
     <ModalFrame onClose={onModalClose}>

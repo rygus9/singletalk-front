@@ -3,21 +3,9 @@ import BoardListInfo from "components/mocular/board/BoardListInfo";
 import ChatList from "components/mocular/chat/ChatList";
 import BottomInput from "components/mocular/common/BottomInput";
 import Profile from "components/mocular/common/Profile";
+import { PostApiOutput } from "util/api/post";
 
-interface PostType {
-  postId: string;
-  title: string;
-  content: string;
-  userId: string;
-  userNickName: string;
-  isScrap: boolean;
-  isJoy: boolean;
-  isUseful: boolean;
-  joyfulCnt: number;
-  usefulCnt: number;
-  commentCnt: number;
-  isOwner: boolean;
-}
+type PostType = PostApiOutput;
 
 const data: PostType = {
   postId: "포스트1",
@@ -44,7 +32,21 @@ export default function Board() {
         <header className="pt-10 pb-3">
           <h2 className="text-2xl">{data.title}</h2>
         </header>
-        <Profile nickname={data.userNickName}></Profile>
+        <div className="flex items-center justify-between">
+          <Profile nickname={data.userNickName}></Profile>
+          {data.isOwner ? (
+            <div className="flex items-center space-x-2">
+              <NormalButton type="button" size="sm">
+                수정하기
+              </NormalButton>
+              <NormalButton type="button" size="sm">
+                삭제하기
+              </NormalButton>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
         <p className="text-black text-lg mt-5 mb-3 px-1">
           {data.content.split("\n").map((elem, index) => (
             <span key={index}>

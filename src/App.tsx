@@ -14,6 +14,7 @@ import MatchPage from "components/page/matching/MatchPage";
 import { cls } from "util/utils";
 import { useRecoilValue } from "recoil";
 import { openState } from "recoil/openState";
+import { useUser } from "util/hook/useUser";
 
 function headerWrapping(children: JSX.Element | string, subtitle?: string) {
   return (
@@ -34,6 +35,7 @@ function bottomNavWrapping(children: JSX.Element) {
 
 function App() {
   const open = useRecoilValue(openState);
+  useUser();
 
   return (
     <div
@@ -48,25 +50,25 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/regist" element={<Register />}></Route>
         <Route
-          path="/globalBoard"
+          path="/global"
           element={headerWrapping(
             bottomNavWrapping(<GlobalBoardList />),
             "(All)"
           )}
         ></Route>
         <Route
-          path="/localBoard"
+          path="/local"
           element={headerWrapping(
             bottomNavWrapping(<LocalBoardList />),
             "(Local)"
           )}
         ></Route>
         <Route
-          path="/globalBoard/create"
+          path="/global/create"
           element={headerWrapping(<BoardCreate />, "(write)")}
         ></Route>
         <Route
-          path="/localBoard/create"
+          path="/local/create"
           element={headerWrapping(<BoardCreate />, "(write)")}
         ></Route>
         <Route

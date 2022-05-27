@@ -17,7 +17,6 @@ export default function LocationInput({
   subLocRegister: UseFormRegisterReturn;
 }) {
   const { data: bigData } = useBigLocation();
-  console.log(nowLoc);
   return (
     <div>
       <div className="text-deepBlack pb-1">거주 지역</div>

@@ -2,21 +2,20 @@ import BoardListItem from "components/mocular/board/BoardListItem";
 import BoardNav from "components/mocular/boardCategory/BoardNav";
 import GlobalCategory from "components/mocular/boardCategory/GlobalCategory";
 import FloatingButton from "components/mocular/common/FloatingButton";
-
-export interface BoardListType {
-  title: string;
-  userId: string;
-  postId: string;
-  userNickname: string;
-  userImgSrc?: string | null;
-  content: string;
-  modifiedDate: string;
-  usefulCnt: number;
-  joyfulCnt: number;
-  commentCnt: number;
-}
+import { useLocation } from "react-router-dom";
+import { BoardListType } from "util/api/post";
+import { usePostList } from "./hook/usePostList";
 
 export default function GlobalBoardList() {
+  const location = useLocation();
+  const queryPath = location.search;
+  const nowPath = location.pathname.split("/")[1];
+  const patchPath = queryPath
+    ? queryPath + "&boardType=" + nowPath
+    : "?boardType=" + nowPath;
+
+  const { data, isLoading } = usePostList(patchPath);
+
   let mockData: BoardListType[] = [];
 
   for (let _ of [1, 2, 3, 4, 5]) {
@@ -25,7 +24,6 @@ export default function GlobalBoardList() {
       userId: "유저1",
       postId: "포스트1",
       userNickname: "Cuzz",
-      userImgSrc: null,
       content: "여기에는 내용이 들어갑니다.",
       modifiedDate: "2022.03.13",
       usefulCnt: 10,

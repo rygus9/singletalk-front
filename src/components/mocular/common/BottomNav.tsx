@@ -13,12 +13,12 @@ const bottomNavElem: {
   {
     element: <Home />,
     coloredElement: <Home colored={true} />,
-    url: "/globalBoard",
+    url: "/global",
   },
   {
     element: <Chat />,
     coloredElement: <Chat colored={true} />,
-    url: "/localBoard",
+    url: "/local",
   },
   {
     element: <Match />,

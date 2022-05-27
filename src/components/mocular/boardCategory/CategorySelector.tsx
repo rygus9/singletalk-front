@@ -21,23 +21,25 @@ export default function CategorySelector({
 
   return (
     <div className="w-full flex justify-evenly">
-      {nowList.map((elem) =>
-        elem.category === now ? (
-          <button
-            onClick={() => setValue("category", elem.category)}
-            type="button"
-          >
-            {elem.coloredElement}
-          </button>
-        ) : (
-          <button
-            onClick={() => setValue("category", elem.category)}
-            type="button"
-          >
-            {elem.element}
-          </button>
-        )
-      )}
+      {nowList.map((elem, index) => (
+        <div key={index}>
+          {elem.category === now ? (
+            <button
+              onClick={() => setValue("category", elem.category)}
+              type="button"
+            >
+              {elem.coloredElement}
+            </button>
+          ) : (
+            <button
+              onClick={() => setValue("category", elem.category)}
+              type="button"
+            >
+              {elem.element}
+            </button>
+          )}
+        </div>
+      ))}
     </div>
   );
 }

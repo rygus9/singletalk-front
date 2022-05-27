@@ -6,30 +6,34 @@ const data = [
     commentId: "댓글1",
     postId: "포스트1",
     userId: "유저1",
-    userImgSrc: null,
     userNickName: "Cuzz",
     content: `아 정말 귀찮다. 그림 그리기 싫다.
               재밌겠다. 으아아아아앙`,
     joyfulCnt: 10,
     commentCnt: 2,
+    isOwner: false,
+    isDelete: true,
+    isJoyful: true,
     answers: [
       {
         commentId: "댓글1",
         postId: "포스트1",
         userId: "유저1",
-        userImgSrc: null,
         userNickName: "Cuzz",
         content: `아 정말 귀찮다. 그림 그리기 싫다.
               재밌겠다. 으아아아아앙`,
+        isOwner: false,
+        isDelete: true,
       },
       {
         commentId: "댓글1",
         postId: "포스트1",
         userId: "유저1",
-        userImgSrc: null,
         userNickName: "Cuzz",
         content: `아 정말 귀찮다. 그림 그리기 싫다.
                 재밌겠다. 으아아아아앙`,
+        isOwner: true,
+        isDelete: false,
       },
     ],
   },
@@ -37,12 +41,14 @@ const data = [
     commentId: "댓글1",
     postId: "포스트1",
     userId: "유저1",
-    userImgSrc: null,
     userNickName: "Cuzz",
     content: `아 정말 귀찮다. 그림 그리기 싫다.
             재밌겠다. 으아아아아앙`,
     joyfulCnt: 10,
     commentCnt: 5,
+    isOwner: false,
+    isDelete: false,
+    isJoyful: false,
   },
 ];
 

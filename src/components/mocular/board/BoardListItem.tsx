@@ -1,5 +1,5 @@
-import { BoardListType } from "components/page/board/GlobalBoardList";
 import { Link } from "react-router-dom";
+import { BoardListType } from "util/api/post";
 import Profile from "../common/Profile";
 import BoardListInfo from "./BoardListInfo";
 

@@ -1,8 +1,10 @@
 import NormalButton from "components/atom/button/NormalButton";
 import LabelInput from "components/atom/input/LabelInput";
 import AuthHeader from "components/mocular/auth/AuthHeader";
+import LoadingText from "components/mocular/common/LoadingText";
 import LocationInput from "components/mocular/location/LocationInput";
 import { useForm } from "react-hook-form";
+import useRegist from "./hook/useRegist";
 
 interface RegisterForm {
   id: string;
@@ -14,6 +16,8 @@ interface RegisterForm {
 }
 
 export default function Register() {
+  const { registError, mutate, isLoading } = useRegist();
+
   const {
     register,
     formState: { errors },
@@ -21,9 +25,29 @@ export default function Register() {
     watch,
   } = useForm<RegisterForm>({ mode: "onChange" });
 
-  const onValid = (data: RegisterForm) => {};
+  const onValid = (data: RegisterForm) => {
+    let inputLocation;
 
-  const onError = (error: any) => {};
+    if (data.subLocation) {
+      inputLocation = data.bigLocation + " " + data.subLocation;
+    } else {
+      inputLocation = data.bigLocation;
+    }
+
+    const inputData = {
+      userID: data.id,
+      nickname: data.nickname,
+      password: data.password,
+      region: inputLocation,
+    };
+
+    mutate(inputData);
+  };
+
+  const onError = (error: any) => {
+    console.log(error);
+  };
+
   return (
     <div className="px-8 h-screen overflow-x-hidden">
       <AuthHeader />
@@ -77,8 +101,17 @@ export default function Register() {
           subLocRegister={register("subLocation")}
         />
         <div className="py-3 flex flex-col items-center">
+          {registError && (
+            <span className="text-sm text-red-500 pb-2">
+              회원가입에 실패했습니다.
+            </span>
+          )}
           <NormalButton type="submit" color="normalColor" size="lg">
-            회원가입
+            {isLoading ? (
+              <LoadingText text={"회원가입 중"}></LoadingText>
+            ) : (
+              "회원가입"
+            )}
           </NormalButton>
         </div>
       </form>

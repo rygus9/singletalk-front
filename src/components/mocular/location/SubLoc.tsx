@@ -10,7 +10,6 @@ export default function SubLoc({
   register: UseFormRegisterReturn;
 }) {
   const { data: subData } = useSubLocation(codeVal.slice(0, 2));
-  console.log(codeVal);
   return (
     <select
       {...register}

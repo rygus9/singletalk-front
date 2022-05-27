@@ -9,6 +9,7 @@ import LocationUI from "components/mocular/boardCategory/LocationUI";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation } from "react-router-dom";
+import usePostRegist from "./hook/usePostRegist";
 
 export interface BoardForm {
   title: string;
@@ -19,11 +20,12 @@ export interface BoardForm {
 
 export default function BoardCreate() {
   const location = useLocation();
-  const [nowBoard, setNowBoard] = useState("");
+  const [nowBoard, setNowBoard] = useState<"global" | "local">("global");
+  const { mutate: postMutate } = usePostRegist();
 
   useEffect(() => {
     const path = location.pathname;
-    setNowBoard(path.split("/")[1]);
+    setNowBoard(path.split("/")[1] as "global" | "local");
   }, [location, setNowBoard]);
 
   const {
@@ -35,7 +37,7 @@ export default function BoardCreate() {
   } = useForm<BoardForm>({ mode: "onSubmit" });
 
   const onSubmit = (data: BoardForm) => {
-    console.log(data);
+    postMutate({ ...data, boardType: nowBoard });
   };
   const onError = (err: any) => {
     console.log(err);
@@ -49,21 +51,17 @@ export default function BoardCreate() {
     <section className="w-full px-4">
       <header className="flex justify-between items-center">
         <h1 className="text-2xl py-4 text-deepBlack">
-          {nowBoard === "globalBoard" ? "전체 게시글" : "지역 게시글"}
+          {nowBoard === "global" ? "전체 게시글" : "지역 게시글"}
         </h1>
         <Link
-          to={
-            nowBoard === "globalBoard"
-              ? "/localBoard/create"
-              : "/globalBoard/create"
-          }
+          to={nowBoard === "global" ? "/local/create" : "/global/create"}
           className="flex items-center text-lightBlack"
         >
-          {nowBoard === "globalBoard" ? "지역 게시글" : "전체 게시글"} 쓰기
-          &nbsp; &gt;
+          {nowBoard === "global" ? "지역 게시글" : "전체 게시글"} 쓰기 &nbsp;
+          &gt;
         </Link>
       </header>
-      {nowBoard === "globalBoard" ? <></> : <LocationUI />}
+      {nowBoard === "global" ? <></> : <LocationUI />}
       <form
         onSubmit={handleSubmit(onSubmit, onError)}
         className="space-y-2 mt-2"
@@ -95,7 +93,7 @@ export default function BoardCreate() {
           register={register("isAnonymous")}
         ></LabelCheckBox>
 
-        <div className="w-full flex justify-center items-center pt-6">
+        <div className="w-full flex justify-center items-center pt-6 pb-10">
           <NormalButton type="submit" size="lg" color="normalColor">
             제출하기
           </NormalButton>
