@@ -25,7 +25,7 @@ const data: MatchType = {
     그럼 숟가락으로 퍼먹으면 되는데 나름 색다름.`,
   userId: "유저1",
   userNickName: "Cuzz",
-  isOwner: true,
+  isOwner: false,
   isJoin: false,
   openLink: "opensource Link",
 };

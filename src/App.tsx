@@ -41,7 +41,10 @@ function App() {
     <div
       className={cls(
         "max-w-[30rem] m-auto",
-        open.logoutOpen || open.matchingOpen || open.postDeleteOpen
+        open.logoutOpen ||
+          open.matchingOpen ||
+          open.postDeleteOpen ||
+          open.locationChangeOpen
           ? "h-screen overflow-hidden"
           : ""
       )}

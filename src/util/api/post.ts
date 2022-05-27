@@ -36,8 +36,10 @@ export interface PostRegistApiInput {
   boardType: "global" | "local";
 }
 
-export const PostRegistApi = ({ ...elem }: PostRegistApiInput) =>
-  wrappingAxios(client.post("/postings", { ...elem }));
+export const PostRegistApi = ({ ...elem }: PostRegistApiInput) => {
+  console.log({ ...elem });
+  return wrappingAxios(client.post("/postings", { ...elem }));
+};
 
 export const PostChangeApi = ({ ...elem }, postId: number) =>
   wrappingAxios(client.put(`/postings/${postId}`, { ...elem }));
