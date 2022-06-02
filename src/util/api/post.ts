@@ -6,26 +6,34 @@ import client from "./client";
 // PostList R
 export interface BoardListType {
   title: string;
-  userId: string;
-  postId: string;
+  userID: string;
+  userIdx: number;
+  postingIdx: number;
   userNickname: string;
   content: string;
-  modifiedDate: string;
+  updatedAt: string;
+  createdAt: string;
   usefulCnt: number;
   joyfulCnt: number;
+  scrapCnt: number;
   commentCnt: number;
+  isUseful: boolean;
+  isJoyful: boolean;
+  isScrap: boolean;
 }
 
 export type PostListApiInput = {
-  category?: GlobalCategoryKind | LocalCategoryKind;
-  sort?: "useful" | "joyful" | "all";
-  boardType: "global" | "local";
+  category: GlobalCategoryKind | LocalCategoryKind;
+  sort: "useful" | "joyful" | "all";
+  type: "global" | "local";
 };
 
-export type PostListApiOutput = BoardListType[];
+export interface PostListApiOutput {
+  result: BoardListType[];
+}
 
 export const postListApi = (elem: string) =>
-  wrappingAxios(client.get(`/postings/${elem}`));
+  wrappingAxios(client.get(`/postings${elem}`));
 
 // Post CUD
 export interface PostRegistApiInput {
@@ -36,15 +44,16 @@ export interface PostRegistApiInput {
   boardType: "global" | "local";
 }
 
-export const PostRegistApi = ({ ...elem }: PostRegistApiInput) => {
-  console.log({ ...elem });
+export const postRegistApi = ({ ...elem }: PostRegistApiInput) => {
   return wrappingAxios(client.post("/postings", { ...elem }));
 };
 
-export const PostChangeApi = ({ ...elem }, postId: number) =>
-  wrappingAxios(client.put(`/postings/${postId}`, { ...elem }));
+export const postChangeApi = (
+  { ...elem }: PostRegistApiInput,
+  postId: string
+) => wrappingAxios(client.put(`/postings/${postId}`, { ...elem }));
 
-export const PostDeleteApi = (postId: number) =>
+export const postDeleteApi = (postId: string) =>
   wrappingAxios(client.delete(`/postings/${postId}`));
 
 // Mypage PostList R
@@ -52,34 +61,46 @@ export type MyPagePostListApiInput = {
   boardType: "global" | "local";
 };
 
-export type MypagePostListApiOutput = BoardListType[];
+export interface MypagePostListApiOutput {
+  result: BoardListType[];
+}
 
 export const mypagePostListApi = ({ ...elem }: MyPagePostListApiInput) =>
   wrappingAxios(client.get("/postings/mypage", { params: { ...elem } }));
 
 // Post R
-export interface PostApiOutput {
-  postId: string;
+export interface BoardType {
+  postingIdx: number;
   title: string;
+  userID: string;
+  userIdx: number;
+  userNickname: string;
   content: string;
-  userId: string;
-  userNickName: string;
-  isScrap: boolean;
-  isJoy: boolean;
-  isUseful: boolean;
-  joyfulCnt: number;
+  updatedAt: string;
+  createdAt: string;
   usefulCnt: number;
+  joyfulCnt: number;
+  scrapCnt: number;
   commentCnt: number;
+  isUseful: boolean;
+  isJoyful: boolean;
+  isScrap: boolean;
+  isAnonymous: boolean;
+  category: string;
   isOwner: boolean;
 }
 
-export const postApi = (postId: number) =>
+export interface PostApiOutput {
+  result: BoardType;
+}
+
+export const postApi = (postId: string) =>
   wrappingAxios(client.get(`/postings/${postId}`));
 
 const postActionApi = (
   type: "reply" | "comment" | "posting",
   category: "joyful" | "useful" | "scrap",
-  parentIdx: number = 0
+  parentIdx: string
 ) =>
   wrappingAxios(
     client.post(
@@ -89,10 +110,14 @@ const postActionApi = (
     )
   );
 
-export const postScrap = () => postActionApi("posting", "scrap");
-export const postJoyful = () => postActionApi("posting", "joyful");
-export const postUseful = () => postActionApi("posting", "useful");
-export const commentJoyful = () => postActionApi("comment", "joyful");
+export const postScrapApi = (postId: string) =>
+  postActionApi("posting", "scrap", postId);
+export const postJoyfulApi = (postId: string) =>
+  postActionApi("posting", "joyful", postId);
+export const postUsefulApi = (postId: string) =>
+  postActionApi("posting", "useful", postId);
+export const commentJoyfulApi = (commentId: string) =>
+  postActionApi("comment", "joyful", commentId);
 
 // Comment
 export interface CommentRegistApiInput {

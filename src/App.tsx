@@ -15,6 +15,7 @@ import { cls } from "util/utils";
 import { useRecoilValue } from "recoil";
 import { openState } from "recoil/openState";
 import { useUser } from "util/hook/useUser";
+import BoardUpdate from "components/page/board/BoardUpdate";
 
 function headerWrapping(children: JSX.Element | string, subtitle?: string) {
   return (
@@ -75,8 +76,12 @@ function App() {
           element={headerWrapping(<BoardCreate />, "(write)")}
         ></Route>
         <Route
-          path="/board/:postId"
+          path="/board/:postIdx"
           element={headerWrapping(<Board />, "")}
+        ></Route>
+        <Route
+          path="/board/:postIdx/update"
+          element={headerWrapping(<BoardUpdate />, "")}
         ></Route>
         <Route
           path="/matching"
@@ -87,7 +92,7 @@ function App() {
           element={headerWrapping(<MatchCreate />, "(write)")}
         ></Route>
         <Route
-          path="/matching/:matchId"
+          path="/matching/:matchIdx"
           element={headerWrapping(<MatchPage />)}
         ></Route>
         <Route

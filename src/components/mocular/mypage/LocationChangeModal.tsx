@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { openState } from "recoil/openState";
 import ModalFrame from "../common/ModalFram";
 import LocationInput from "../location/LocationInput";
+import useChangeLocation from "./hook/useChangeLocation";
 
 export default function LocationChangeModal() {
   const [open, setOpen] = useRecoilState(openState);
@@ -22,6 +23,17 @@ export default function LocationChangeModal() {
     mode: "onChange",
   });
 
+  const { mutate } = useChangeLocation(() =>
+    setOpen({ ...open, locationChangeOpen: false })
+  );
+
+  const onSubmit = (data: { bigLocation: string; subLocation: string }) => {
+    const returnValue = data.subLocation
+      ? data.bigLocation + " " + data.subLocation
+      : data.bigLocation;
+    mutate({ region: returnValue });
+  };
+
   return (
     <ModalFrame onClose={onModalClose}>
       <div className="inner relative left-1/2 top-1/3 -translate-y-1/2 -translate-x-1/2 w-fit bg-white rounded-lg">
@@ -29,7 +41,7 @@ export default function LocationChangeModal() {
           <h3>위치 변경하기</h3>
         </div>
         <div className="pb-5 flex justify-center items-center space-x-3 px-5">
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <LocationInput
               nowLoc={watch().bigLocation}
               bigLocRegister={register("bigLocation")}

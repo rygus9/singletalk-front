@@ -11,7 +11,7 @@ export default function useSort() {
   const onSortSet = useCallback(
     (category: string) => {
       searchParams.set("sort", category);
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     },
     [searchParams, setSearchParams]
   );

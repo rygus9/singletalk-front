@@ -1,5 +1,4 @@
 import { LocInfo } from "./../../components/mocular/location/LocationInput";
-import client from "./client";
 
 export const getSubLocation = (twoCode: string) => {
   const datas = [

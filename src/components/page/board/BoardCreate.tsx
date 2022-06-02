@@ -1,22 +1,8 @@
-import NormalButton from "components/atom/button/NormalButton";
-import LabelInput from "components/atom/input/LabelInput";
-import LabelCheckBox from "components/atom/selectBox/LabelCheckBox";
-import TextArea from "components/atom/textArea";
-import CategorySelector from "components/mocular/boardCategory/CategorySelector";
-import { GlobalCategoryKind } from "components/mocular/boardCategory/GlobalCategory";
-import { LocalCategoryKind } from "components/mocular/boardCategory/LocalCategory";
+import BoardForm, { BoardFormType } from "components/mocular/board/BoardForm";
 import LocationUI from "components/mocular/boardCategory/LocationUI";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { Link, useLocation } from "react-router-dom";
 import usePostRegist from "./hook/usePostRegist";
-
-export interface BoardForm {
-  title: string;
-  content: string;
-  category: LocalCategoryKind | GlobalCategoryKind;
-  isAnonymous: boolean;
-}
 
 export default function BoardCreate() {
   const location = useLocation();
@@ -28,24 +14,9 @@ export default function BoardCreate() {
     setNowBoard(path.split("/")[1] as "global" | "local");
   }, [location, setNowBoard]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    watch,
-  } = useForm<BoardForm>({ mode: "onSubmit" });
-
-  const onSubmit = (data: BoardForm) => {
+  const onSubmit = (data: BoardFormType) => {
     postMutate({ ...data, boardType: nowBoard });
   };
-  const onError = (err: any) => {
-    console.log(err);
-  };
-
-  useEffect(() => {
-    setValue("category", "all");
-  }, [setValue]);
 
   return (
     <section className="w-full px-4">
@@ -62,43 +33,7 @@ export default function BoardCreate() {
         </Link>
       </header>
       {nowBoard === "global" ? <></> : <LocationUI />}
-      <form
-        onSubmit={handleSubmit(onSubmit, onError)}
-        className="space-y-2 mt-2"
-      >
-        <LabelInput
-          label="제목"
-          labelSize="lg"
-          placeholder="제목을 입력하세요"
-          register={register("title", {
-            required: "제목은 필수로 입력해야 합니다.",
-          })}
-          error={errors.title}
-        ></LabelInput>
-        <TextArea
-          label="내용"
-          register={register("content", {
-            required: "내용은 필수로 입력해야 합니다.",
-          })}
-          error={errors.content}
-        ></TextArea>
-        <div className="text-xl">카테고리</div>
-        <CategorySelector
-          type="global"
-          now={watch().category}
-          setValue={setValue}
-        />
-        <LabelCheckBox
-          label={"익명 여부"}
-          register={register("isAnonymous")}
-        ></LabelCheckBox>
-
-        <div className="w-full flex justify-center items-center pt-6 pb-10">
-          <NormalButton type="submit" size="lg" color="normalColor">
-            제출하기
-          </NormalButton>
-        </div>
-      </form>
+      <BoardForm onSubmit={onSubmit} type={nowBoard}></BoardForm>
     </section>
   );
 }

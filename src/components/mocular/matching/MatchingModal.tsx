@@ -1,20 +1,11 @@
 import NormalButton from "components/atom/button/NormalButton";
 import { useCallback } from "react";
+import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { openState } from "recoil/openState";
 import ModalFrame from "../common/ModalFram";
 import Profile from "../common/Profile";
-
-export interface MatchPersonType {
-  userId: string;
-  userNickName: string;
-}
-
-const data: MatchPersonType[] = [
-  { userId: "멤버1", userNickName: "Cuzz" },
-  { userId: "멤버1", userNickName: "Cuzz" },
-  { userId: "멤버1", userNickName: "Cuzz" },
-];
+import { useMatchingRooom } from "./hook/useMatchingRoom";
 
 export default function MatchingModal() {
   const [open, setOpen] = useRecoilState(openState);
@@ -23,6 +14,10 @@ export default function MatchingModal() {
     setOpen({ ...open, matchingOpen: !open.matchingOpen });
   }, [open, setOpen]);
 
+  const params = useParams();
+
+  const { data: memberList } = useMatchingRooom(params.matchIdx!);
+
   return (
     <ModalFrame onClose={onModalClose}>
       <div className="inner relative left-1/2 top-1/3 -translate-y-1/2 -translate-x-1/2 w-fit bg-white rounded-lg">
@@ -30,16 +25,20 @@ export default function MatchingModal() {
           <h2 className="text-2xl">매칭 현황</h2>
         </div>
         <section className="space-y-2">
-          {data.map((elem) => (
-            <div className="flex items-center justify-between px-4">
-              <div>
-                <Profile nickname={elem.userNickName} />
+          {memberList &&
+            memberList.map((elem, index) => (
+              <div
+                className="flex items-center justify-between px-4"
+                key={index}
+              >
+                <div>
+                  <Profile nickname={elem.userNickName} />
+                </div>
+                <NormalButton type="button" size="sm">
+                  삭제하기
+                </NormalButton>
               </div>
-              <NormalButton type="button" size="sm">
-                삭제하기
-              </NormalButton>
-            </div>
-          ))}
+            ))}
         </section>
         <div className="w-full py-6 flex justify-center items-center space-x-4">
           <NormalButton color="normalColor" size="sm">

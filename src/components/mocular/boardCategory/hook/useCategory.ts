@@ -11,7 +11,7 @@ export default function useCategory() {
   const onCategorySet = useCallback(
     (category: string) => {
       searchParams.set("category", category);
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     },
     [searchParams, setSearchParams]
   );

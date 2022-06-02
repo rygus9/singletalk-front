@@ -3,6 +3,7 @@ import Input from "components/atom/input";
 import LabelInput from "components/atom/input/LabelInput";
 import TextArea from "components/atom/textArea";
 import { useForm } from "react-hook-form";
+import useMatchingRegist from "./hook/useMatchingRegist";
 
 export interface MatchForm {
   title: string;
@@ -12,6 +13,8 @@ export interface MatchForm {
 }
 
 export default function MatchCreate() {
+  const { mutate: MatchingMutate } = useMatchingRegist();
+
   const {
     register,
     handleSubmit,
@@ -19,7 +22,7 @@ export default function MatchCreate() {
   } = useForm<MatchForm>({ mode: "onSubmit" });
 
   const onSubmit = (data: MatchForm) => {
-    console.log(data);
+    MatchingMutate(data);
   };
   const onError = (err: any) => {
     console.log(err);

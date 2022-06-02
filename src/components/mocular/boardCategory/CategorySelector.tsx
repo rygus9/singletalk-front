@@ -1,5 +1,5 @@
-import { BoardForm } from "components/page/board/BoardCreate";
 import { UseFormSetValue } from "react-hook-form/dist/types";
+import { BoardFormType } from "../board/BoardForm";
 import { GlobalCategoryKind, globalElement } from "./GlobalCategory";
 import { LocalCategoryKind, localElement } from "./LocalCategory";
 
@@ -10,13 +10,13 @@ export default function CategorySelector({
 }: {
   now: GlobalCategoryKind | LocalCategoryKind;
   type: "global" | "local";
-  setValue: UseFormSetValue<BoardForm>;
+  setValue: UseFormSetValue<BoardFormType>;
 }) {
   let nowList;
   if (type === "global") {
-    nowList = globalElement;
+    nowList = globalElement.filter((elem, index) => index !== 0);
   } else {
-    nowList = localElement;
+    nowList = localElement.filter((elem, index) => index !== 0);
   }
 
   return (
