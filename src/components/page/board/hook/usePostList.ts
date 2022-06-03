@@ -10,6 +10,5 @@ const getPostList = async (elem: string): Promise<PostListApiOutput> => {
 export const usePostList = (elem: string) => {
   return useQuery(["posts", elem], () => getPostList(elem), {
     retry: 1,
-    refetchOnWindowFocus: false,
   });
 };

@@ -2,7 +2,7 @@ import NormalButton from "components/atom/button/NormalButton";
 import BoardDeleteModal from "components/mocular/board/BoardDeleteModal";
 import BoardListInfo from "components/mocular/board/BoardListInfo";
 import ChatList from "components/mocular/chat/ChatList";
-import BottomInput from "components/mocular/common/BottomInput";
+import BottomInput from "components/mocular/chat/BottomInput";
 import Profile from "components/mocular/common/Profile";
 import { useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";

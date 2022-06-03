@@ -56,17 +56,13 @@ export const postChangeApi = (
 export const postDeleteApi = (postId: string) =>
   wrappingAxios(client.delete(`/postings/${postId}`));
 
-// Mypage PostList R
-export type MyPagePostListApiInput = {
-  boardType: "global" | "local";
-};
-
+// Mypage PostList
 export interface MypagePostListApiOutput {
   result: BoardListType[];
 }
 
-export const mypagePostListApi = ({ ...elem }: MyPagePostListApiInput) =>
-  wrappingAxios(client.get("/postings/mypage", { params: { ...elem } }));
+export const mypagePostListApi = (elem: string) =>
+  wrappingAxios(client.get(`/postings/mypage${elem}`));
 
 // Post R
 export interface BoardType {
@@ -121,44 +117,60 @@ export const commentJoyfulApi = (commentId: string) =>
 
 // Comment
 export interface CommentRegistApiInput {
-  postingIdx: number | null; // null 이면 commentIdx는 무조건 값 있음.
-  commentIdx: number | null; // null 이면 postingIdx는 무조건 값 있음.
+  postingIdx: string | null; // null 이면 commentIdx는 무조건 값 있음.
+  commentIdx: string | null; // null 이면 postingIdx는 무조건 값 있음.
   content: string;
   isAnonymous: boolean;
 }
 
-export const commentRegistApi = ({ ...elem }: CommentRegistApiInput) =>
-  client.post("/comments", { ...elem });
+export const commentRegistApi = ({ ...elem }: CommentRegistApiInput) => {
+  return wrappingAxios(client.post("/comments", { ...elem }));
+};
 
 export interface CommentDeleteApiInput {
   type: "comment" | "reply";
+  commentId: string;
 }
 
-export const commentDeleteApi = (
-  { ...elem }: CommentDeleteApiInput,
-  commentId: number
-) => client.delete(`/comment/${commentId}`, { params: { ...elem } });
+export const commentDeleteApi = ({ ...elem }: CommentDeleteApiInput) =>
+  wrappingAxios(
+    client.delete(`/comments/${elem.commentId}`, {
+      params: { type: elem.type },
+    })
+  );
 
 export interface SubChatElemProps {
-  postId: string;
-  userId: string;
-  userNickName: string;
+  replyIdx: number;
+  commentIdx: number;
+  userIdx: number;
+  userNickname: string;
   content: string;
+  isDeleted: boolean;
+  isAnonymous: boolean;
   isOwner: boolean;
-  isDelete: boolean;
 }
 
-export interface MainChatElemProps extends SubChatElemProps {
+export interface MainChatElemProps {
+  commentIdx: number;
+  postingIdx: number;
+  userIdx: number;
+  userNickname: string;
+  content: string;
+  isAnonymous: boolean;
   joyfulCnt: number;
-  commentCnt: number;
+  replyCnt: number;
   isJoyful: boolean;
+  isOwner: boolean;
+  isDelete: boolean;
 }
 
 export interface MainChatProps extends MainChatElemProps {
   answers: SubChatElemProps[];
 }
 
-export type CommentApiResult = MainChatProps[];
+export interface CommentApiResult {
+  result: MainChatProps[];
+}
 
-export const commentApi = (postId: number) =>
-  client.get(`/postings/${postId}/comment`);
+export const commentApi = (postId: string): Promise<CommentApiResult> =>
+  wrappingAxios(client.get(`/comments/${postId}`));

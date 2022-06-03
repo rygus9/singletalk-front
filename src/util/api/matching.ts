@@ -78,3 +78,6 @@ export type matchingRoomApiOutput = {
 
 export const matchingRoomApi = (matchingIdx: string) =>
   wrappingAxios(client.get(`/matchings/${matchingIdx}/room`));
+
+export const mypageMatchingListApi = () =>
+  wrappingAxios(client.get("/matchings/mypage"));
