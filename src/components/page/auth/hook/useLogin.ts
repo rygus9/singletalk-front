@@ -15,7 +15,7 @@ export default function useLogin() {
         setLoginError(true);
       },
       onSuccess: (result) => {
-        if (result) {
+        if (result.result) {
           navigate("/global");
         } else {
           setLoginError(true);
