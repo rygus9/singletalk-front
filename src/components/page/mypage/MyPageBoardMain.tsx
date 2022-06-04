@@ -10,7 +10,10 @@ export default function MyPageBoardMain() {
 
   return (
     <main className="mb-20 divide-y divide-gray">
-      {data && data.map((elem: any) => <BoardListItem {...elem} />)}
+      {data &&
+        data.map((elem: any, index: number) => (
+          <BoardListItem {...elem} key={index} />
+        ))}
     </main>
   );
 }

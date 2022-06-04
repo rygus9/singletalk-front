@@ -17,7 +17,7 @@ export interface MatchingJoin {
   matchingIdx: number;
 }
 
-export interface MypageType {
+export interface MatchingType {
   title: string;
   content: string;
   user: MatchingOwner;
@@ -35,14 +35,14 @@ export interface MypageType {
 }
 
 export interface MatchingListApiOutput {
-  result: MypageType[];
+  result: MatchingType[];
 }
 
 export const matchingListApi = (elem: string) =>
   wrappingAxios(client.get(`/matchings${elem}`));
 
 export interface MatchingApiOutput {
-  result: MypageType;
+  result: MatchingType;
 }
 
 export const matchingApi = (matchIdx: string) =>
@@ -78,6 +78,12 @@ export type matchingRoomApiOutput = {
 
 export const matchingRoomApi = (matchingIdx: string) =>
   wrappingAxios(client.get(`/matchings/${matchingIdx}/room`));
+
+export const matchingDoneApi = (matchingIdx: string) =>
+  wrappingAxios(client.post(`/matchings/${matchingIdx}/done`));
+
+export const matchingOutApi = (matchingIdx: string, userIdx: string) =>
+  wrappingAxios(client.post(`/matchings/${matchingIdx}/${userIdx}/out`));
 
 export const mypageMatchingListApi = () =>
   wrappingAxios(client.get("/matchings/mypage"));

@@ -25,3 +25,6 @@ export interface EditProfileInput {
 
 export const editProfileApi = (data: EditProfileInput) =>
   wrappingAxios(client.put("users/my-page", data));
+
+export const getScrapPostApi = (elem: string) =>
+  wrappingAxios(client.get("postings/scrap" + elem));

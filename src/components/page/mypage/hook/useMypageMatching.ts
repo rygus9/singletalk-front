@@ -1,7 +1,7 @@
-import { MypageType, mypageMatchingListApi } from "util/api/matching";
+import { MatchingType, mypageMatchingListApi } from "util/api/matching";
 import { useQuery } from "react-query";
 
-const getMyPageMatchingList = async (): Promise<MypageType[]> => {
+const getMyPageMatchingList = async (): Promise<MatchingType[]> => {
   const data = await mypageMatchingListApi();
   console.log(data);
   return data.result;

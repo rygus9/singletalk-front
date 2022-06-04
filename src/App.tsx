@@ -16,6 +16,7 @@ import { useRecoilValue } from "recoil";
 import { openState } from "recoil/openState";
 import { useUser } from "util/hook/useUser";
 import BoardUpdate from "components/page/board/BoardUpdate";
+import MatchUpdate from "components/page/matching/MatchUpdate";
 
 function headerWrapping(children: JSX.Element | string, subtitle?: string) {
   return (
@@ -94,6 +95,10 @@ function App() {
         <Route
           path="/matching/:matchIdx"
           element={headerWrapping(<MatchPage />)}
+        ></Route>
+        <Route
+          path="/matching/:matchIdx/update"
+          element={headerWrapping(<MatchUpdate />)}
         ></Route>
         <Route
           path="/mypage"

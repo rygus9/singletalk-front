@@ -5,11 +5,13 @@ import { useCallback } from "react";
 import { useRecoilState } from "recoil";
 import { openState } from "recoil/openState";
 import { useMatching } from "./hook/useMatching";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useMatchingJoin from "./hook/useMatchingJoin";
+import MatchingDeleteModal from "components/mocular/matching/MatchingDeleteModal";
 
 export default function MatchPage() {
   const [open, setOpen] = useRecoilState(openState);
+  const navigate = useNavigate();
 
   const onMatchingClick = useCallback(() => {
     setOpen({ ...open, matchingOpen: !open.matchingOpen });
@@ -20,6 +22,14 @@ export default function MatchPage() {
   const { data } = useMatching(params.matchIdx!);
   const { mutate } = useMatchingJoin();
 
+  const onChangeClick = useCallback(() => {
+    navigate("./update");
+  }, [navigate]);
+
+  const onDeleteClick = useCallback(() => {
+    setOpen({ ...open, matchingDeleteOpen: !open.matchingDeleteOpen });
+  }, [open, setOpen]);
+
   return (
     <>
       <main className="px-4">
@@ -27,8 +37,12 @@ export default function MatchPage() {
           <h2 className="text-2xl">{data?.title}</h2>
           {data?.isOwner ? (
             <div className="flex items-center justify-center space-x-4 pt-5">
-              <NormalButton size="sm">수정하기</NormalButton>
-              <NormalButton size="sm">삭제하기</NormalButton>
+              <NormalButton size="sm" onClick={onChangeClick}>
+                수정하기
+              </NormalButton>
+              <NormalButton size="sm" onClick={onDeleteClick}>
+                삭제하기
+              </NormalButton>
             </div>
           ) : (
             <></>
@@ -61,6 +75,7 @@ export default function MatchPage() {
         </div>
       </main>
       {open.matchingOpen && <MatchingModal />}
+      {open.matchingDeleteOpen && <MatchingDeleteModal />}
     </>
   );
 }

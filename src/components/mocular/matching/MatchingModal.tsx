@@ -5,6 +5,8 @@ import { useRecoilState } from "recoil";
 import { openState } from "recoil/openState";
 import ModalFrame from "../common/ModalFram";
 import Profile from "../common/Profile";
+import useMatchingDone from "./hook/useMatchingDone";
+import useMatchingOut from "./hook/useMatchingOut";
 import { useMatchingRooom } from "./hook/useMatchingRoom";
 
 export default function MatchingModal() {
@@ -13,6 +15,20 @@ export default function MatchingModal() {
   const onModalClose = useCallback(() => {
     setOpen({ ...open, matchingOpen: !open.matchingOpen });
   }, [open, setOpen]);
+
+  const { mutate: doneMutate } = useMatchingDone();
+  const { mutate: outMutate } = useMatchingOut();
+
+  const onDoneClick = useCallback(() => {
+    doneMutate();
+  }, [doneMutate]);
+
+  const onOutClick = useCallback(
+    (userId: string) => {
+      outMutate(userId);
+    },
+    [outMutate]
+  );
 
   const params = useParams();
 
@@ -34,14 +50,18 @@ export default function MatchingModal() {
                 <div>
                   <Profile nickname={elem.userNickName} />
                 </div>
-                <NormalButton type="button" size="sm">
+                <NormalButton
+                  type="button"
+                  size="sm"
+                  onClick={() => onOutClick(elem.userID)}
+                >
                   삭제하기
                 </NormalButton>
               </div>
             ))}
         </section>
         <div className="w-full py-6 flex justify-center items-center space-x-4">
-          <NormalButton color="normalColor" size="sm">
+          <NormalButton color="normalColor" size="sm" onClick={onDoneClick}>
             확정하기
           </NormalButton>
           <NormalButton size="sm" onClick={onModalClose}>
