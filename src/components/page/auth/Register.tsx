@@ -6,7 +6,7 @@ import LocationInput from "components/mocular/location/LocationInput";
 import { useForm } from "react-hook-form";
 import useRegist from "./hook/useRegist";
 
-interface RegisterForm {
+export interface RegisterForm {
   id: string;
   nickname: string;
   password: string;
@@ -16,16 +16,23 @@ interface RegisterForm {
 }
 
 export default function Register() {
-  const { registError, mutate, isLoading } = useRegist();
-
   const {
     register,
     formState: { errors },
     handleSubmit,
     watch,
+    setError,
   } = useForm<RegisterForm>({ mode: "onChange" });
 
+  const { registError, mutate, isLoading } = useRegist(setError);
+
   const onValid = (data: RegisterForm) => {
+    if (data.password !== data.passwordValid) {
+      setError("password", { message: "비밀번호가 일치하지 않습니다." });
+      setError("passwordValid", { message: "비밀번호가 일치하지 않습니다." });
+      return;
+    }
+
     let inputLocation;
 
     if (data.subLocation) {

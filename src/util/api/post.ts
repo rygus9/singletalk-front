@@ -20,6 +20,7 @@ export interface BoardListType {
   isUseful: boolean;
   isJoyful: boolean;
   isScrap: boolean;
+  isAnonymous: boolean;
 }
 
 export type PostListApiInput = {

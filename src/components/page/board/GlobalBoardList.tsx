@@ -16,6 +16,7 @@ export default function GlobalBoardList() {
   searchParams.set("type", "global");
 
   const { data, isLoading } = usePostList("?" + searchParams.toString());
+  console.log(data);
 
   return (
     <div>

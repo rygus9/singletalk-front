@@ -14,7 +14,7 @@ export default function useChangeProfile(closeModal: () => void) {
           queryClient.fetchQuery(["profiles"]);
           closeModal();
         } else {
-          console.log("오류가 발생했어요!");
+          alert("중복된 닉네임입니다.");
         }
       },
     }
