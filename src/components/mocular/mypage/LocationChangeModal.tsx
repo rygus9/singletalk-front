@@ -18,6 +18,7 @@ export default function LocationChangeModal() {
     register,
     formState: { errors },
     handleSubmit,
+    setValue,
     watch,
   } = useForm<{ bigLocation: string; subLocation: string }>({
     mode: "onChange",
@@ -46,6 +47,7 @@ export default function LocationChangeModal() {
               nowLoc={watch().bigLocation}
               bigLocRegister={register("bigLocation")}
               subLocRegister={register("subLocation")}
+              setValue={setValue}
             />
             <div className="flex justify-center space-x-3 pt-5">
               <NormalButton type="submit" color="normalColor">

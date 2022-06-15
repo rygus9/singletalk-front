@@ -16,7 +16,7 @@ export default function LocalBoardList() {
   }
   searchParams.set("type", "local");
 
-  const { data, isLoading } = usePostList("?" + searchParams.toString());
+  const { data } = usePostList("?" + searchParams.toString());
 
   return (
     <div>
@@ -29,7 +29,7 @@ export default function LocalBoardList() {
       </aside>
       <div className="flex flex-col h-[calc(100vh-2.9rem)]">
         <div className="flex-none basis-[13.5rem]"></div>
-        <main className="flex-auto divide-y divide-gray px-3 overflow-scroll">
+        <main className="flex-auto divide-y divide-gray px-3 overflow-y-scroll overflow-x-hidden">
           {data &&
             data.result.map((elem, index) => (
               <BoardListItem {...elem} key={index} />

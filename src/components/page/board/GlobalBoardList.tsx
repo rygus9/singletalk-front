@@ -26,7 +26,7 @@ export default function GlobalBoardList() {
       </aside>
       <div className="flex flex-col h-[calc(100vh-2.9rem)]">
         <div className="flex-none basis-[10.8rem]"></div>
-        <main className="flex-auto divide-y-2 divide-gray px-3 overflow-scroll">
+        <main className="flex-auto divide-y-2 divide-gray px-3 overflow-y-scroll overflow-x-hidden">
           {data &&
             data.result.map((elem, index) => (
               <BoardListItem {...elem} key={index} />

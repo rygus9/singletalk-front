@@ -22,6 +22,7 @@ export default function Register() {
     handleSubmit,
     watch,
     setError,
+    setValue,
   } = useForm<RegisterForm>({ mode: "onChange" });
 
   const { registError, mutate, isLoading } = useRegist(setError);

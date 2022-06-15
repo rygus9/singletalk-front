@@ -6,7 +6,7 @@ import Profile from "../common/Profile";
 export default function MatchingBoardListItem({ ...elem }: MatchingType) {
   return (
     <section className="pt-3 pb-1 px-3">
-      <Link to={`./${elem.matchingIdx}`}>
+      <Link to={`/matching/${elem.matchingIdx}`}>
         <div className="flex justify-between items-center">
           <h2 className={cls("text-deepBlack text-xl pb-2")}>{elem.title}</h2>
           <div>

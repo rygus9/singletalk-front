@@ -18,7 +18,7 @@ export default function useMatchingJoin() {
         if (data.result) {
           queryClient.fetchQuery(["matchings", params.matchIdx!]);
         } else {
-          console.log("매칭게시글 조인에 실패했습니다.");
+          alert("방이 넘쳐요!");
         }
       },
     }

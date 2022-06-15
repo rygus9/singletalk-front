@@ -1,4 +1,7 @@
-import { UseFormRegisterReturn } from "react-hook-form/dist/types/form";
+import {
+  UseFormRegisterReturn,
+  UseFormSetValue,
+} from "react-hook-form/dist/types/form";
 import useBigLocation from "./hook/useBigLocation";
 import SubLoc from "./SubLoc";
 
@@ -11,10 +14,15 @@ export default function LocationInput({
   nowLoc,
   bigLocRegister,
   subLocRegister,
+  setValue = null,
 }: {
   nowLoc: string;
   bigLocRegister: UseFormRegisterReturn;
   subLocRegister: UseFormRegisterReturn;
+  setValue?: null | UseFormSetValue<{
+    bigLocation: string;
+    subLocation: string;
+  }>;
 }) {
   const { data: bigData } = useBigLocation();
   return (
@@ -41,6 +49,7 @@ export default function LocationInput({
                 bigData.filter((elem: LocInfo) => elem.name === nowLoc)[0].code
               }
               register={subLocRegister}
+              setValue={setValue}
             ></SubLoc>
           )}
       </div>
